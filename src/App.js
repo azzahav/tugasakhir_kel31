@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import 'antd/dist/antd.css';
+import { Layout, Typography } from 'antd';
+
+import Shop from './components/shop';
+import BestSeller from './components/bestseller'
+import AboutUs from './components/aboutus';
+
+const { Header, Content, Footer } = Layout;
+const { Text } = Typography;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <Router>
+<Layout style={{background:'#FFDAB9'}}>
+      <Header style={{background:'#CD853F'}}>
+        <Text style={{fontFamily:'Fantasy', color:'#FFFFFF', fontSize: '30px'}}>
+        ERIGO STORE
+        </Text>
+        <div style={{float: 'right'}}>
+          <Link to="/" style={{margin:'8px', fontFamily:'Roboto', color:'#FFFFFF', fontSize: '18px'}}>SHOP</Link>
+          <Link to="/bestseller" style={{margin:'8px', fontFamily:'Roboto', color:'#FFFFFF', fontSize: '18px'}}>BEST SELLER</Link>
+          <Link to="/aboutus" style={{margin:'8px', fontFamily:'Roboto', color:'#FFFFFF', fontSize: '18px'}}>ABOUT US</Link>
+        </div>
+      </Header>
+      <Content style={{textAlign:'center', display: 'inlineblock', background:'#FFDAB9'}}>
+        <Switch>
+          <Route path="/" exact component={Shop} />
+          <Route path="/bestseller" exact component={BestSeller} />
+          <Route path="/aboutus" exact component={AboutUs} />
+        </Switch>
+      </Content>
+      <Footer style={{background:'#CD853F', fontSize: '20px', textAlign:'center', width:'100%', fontFamily:'Roboto', color:'#FFFFFF'}}>
+          KELOMPOK 31 - Azzah - Caerel
+        </Footer>
+    </Layout>
+  </Router>
+  )
 }
 
 export default App;
