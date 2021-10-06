@@ -9,22 +9,13 @@ const { Text } = Typography;
 
 function App() {
     const [count, setCount] = useState(0);
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const countUp = () => {
         setCount(count + 1);
     };
-    const showModal = () => {
-        setIsModalVisible(true);
-      };
     const countDown = () => {
         setCount (count - 1);
     };
-    const handleOk = () => {
-        setIsModalVisible(false);
-      };
-      const handleCancel = () => {
-        setIsModalVisible(false);
-      };
+ 
     
     useEffect(() => {
         if (count >0) {
@@ -35,14 +26,6 @@ function App() {
 
     return (
         <div>
-             <div>
-                <Button type="ghost" shape="round" style={{margin:'7px 25px 0px 25px'}} onClick={showModal}>
-                    Description
-                </Button>
-                <Modal title="Description" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>Ini MOdal yaaa...</p>
-      </Modal>
-            </div>
             <div>
                 <Button type="primary" shape="round" style={{margin:'15px 25px 0px 25px'}} onClick={countUp}>
                     Add to Cart
@@ -90,7 +73,15 @@ export default class shop extends Component {
             console.log(error);
         });
     }
-    
+    handleOk = () => {
+        this.setState({visible:false});
+      };
+      handleCancel = () => {
+        this.setState({visible:false});
+      };
+      showModal = (data) => {
+        this.setState({visible:true, add: data});
+      }
     render() {
         return (
         <div>
@@ -104,6 +95,11 @@ export default class shop extends Component {
                             <p>Brand : {results.brand}</p>
                         </div>
                         <div>
+                        <Button type="primary" onClick={() => this.showModal(results.add)}>
+                            Open Modal
+                        </Button>
+                        </div>
+                        <div>
                             <App />
                         </div>
                         
@@ -111,6 +107,9 @@ export default class shop extends Component {
                 </div>
                 );
             })}
+            <Modal title="Description" visible={this.state.visible} onOk={this.handleOk} 
+                        onCancel={this.handleCancel}><p>{this.state.add}</p>
+                        </Modal> 
         </div>
         );
     }

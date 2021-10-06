@@ -23,9 +23,6 @@ class bestseller extends Component {
             return {lihatgambar : !this.state.lihatgambar}
         })
     }
-    componentDidMount() {
-        alert(`OPEN PRODUCT BEST SELLER?`)
-    }
     
     render() {
         return (
